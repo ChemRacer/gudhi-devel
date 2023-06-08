@@ -24,6 +24,7 @@
 #include <utility>  // for pair<>
 
 
+
 namespace Gudhi {
 
 namespace rips_complex {
@@ -43,6 +44,7 @@ namespace rips_complex {
  */
 template<typename Filtration_value>
 class Rips_complex {
+
  public:
   /**
    * \brief Type of the one skeleton graph stored inside the Rips complex structure.
@@ -102,6 +104,9 @@ class Rips_complex {
     GUDHI_CHECK(complex.num_vertices() == 0,
                 std::invalid_argument("Rips_complex::create_complex - simplicial complex is not empty"));
 
+//GMJ 6/8/23
+	std::cout <<"GMJ!!"<<complex.num_vertices() << std::endl;
+//GMJ
     // insert the proximity graph in the simplicial complex
     complex.insert_graph(rips_skeleton_graph_);
     // expand the graph until dimension dim_max
