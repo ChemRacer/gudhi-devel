@@ -17,6 +17,8 @@
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/container/static_vector.hpp>
 
+#include <iostream>
+#include <ostream>
 #include <vector>
 #include <utility>  // for std::pair
 
@@ -114,6 +116,7 @@ class Simplex_tree_boundary_simplex_iterator : public boost::iterator_facade<
     Siblings * sib = st->self_siblings(sh);
     next_ = sib->parent();
     sib_ = sib->oncles();
+
     if (sib_ != nullptr) {
       if (SimplexTree::Options::contiguous_vertices && sib_->oncles() == nullptr)
         // Only relevant for edges

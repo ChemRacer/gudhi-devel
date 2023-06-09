@@ -103,10 +103,6 @@ class Rips_complex {
   void create_complex(SimplicialComplexForRips& complex, int dim_max) {
     GUDHI_CHECK(complex.num_vertices() == 0,
                 std::invalid_argument("Rips_complex::create_complex - simplicial complex is not empty"));
-
-//GMJ 6/8/23
-	std::cout <<"GMJ!!"<<complex.num_vertices() << std::endl;
-//GMJ
     // insert the proximity graph in the simplicial complex
     complex.insert_graph(rips_skeleton_graph_);
     // expand the graph until dimension dim_max

@@ -115,6 +115,9 @@ class Persistent_cohomology {
     }
     Simplex_key idx_fil = 0;
     for (auto sh : cpx_->filtration_simplex_range()) {
+      // GMJ: idx_fil = index of filtration value/simplex
+      // std::cout <<"GMJ!! " << idx_fil << std::endl;
+      // GMJ
       cpx_->assign_key(sh, idx_fil);
       ++idx_fil;
       dsets_.make_set(cpx_->key(sh));
