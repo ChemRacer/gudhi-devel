@@ -16,6 +16,7 @@
 
 
 #include <cstdlib>
+#include <iostream>
 #include <vector>
 #include <utility>  // for std::pair
 #include <algorithm>  // for sort
@@ -61,6 +62,11 @@ persistent_cohomology::Persistent_cohomology<FilteredComplex, persistent_cohomol
     auto const& persistent_pairs = Base::get_persistent_pairs();
     persistence.reserve(persistent_pairs.size());
     for (auto pair : persistent_pairs) {
+      // gmj: Sorted by death
+      // std::cout << "persistence dimension " << stptr_->dimension(get<0>(pair)) << std::endl;
+      // std::cout << "persistence pair " << stptr_->filtration(get<0>(pair))<< " " << stptr_->filtration(get<1>(pair)) << std::endl;
+      // std::cout << " " << std::endl;
+      // gmj
       persistence.emplace_back(stptr_->dimension(get<0>(pair)),
                                std::make_pair(stptr_->filtration(get<0>(pair)),
                                               stptr_->filtration(get<1>(pair))));
@@ -68,6 +74,7 @@ persistent_cohomology::Persistent_cohomology<FilteredComplex, persistent_cohomol
     // Custom sort and output persistence
     cmp_intervals_by_dim_then_length cmp;
     std::sort(std::begin(persistence), std::end(persistence), cmp);
+
     return persistence;
   }
 

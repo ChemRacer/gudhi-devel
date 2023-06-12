@@ -19,7 +19,9 @@
 #include <boost/pending/disjoint_sets.hpp>
 #include <boost/intrusive/list.hpp>
 
+#include <iostream>
 #include <map>
+#include <ostream>
 #include <unordered_map>
 #include <utility>
 #include <list>
@@ -113,11 +115,9 @@ class Persistent_cohomology {
       // num_simplices must be strictly lower than the limit, because a value is reserved for null_key.
       throw std::out_of_range("The number of simplices is more than Simplex_key type numeric limit.");
     }
+
     Simplex_key idx_fil = 0;
     for (auto sh : cpx_->filtration_simplex_range()) {
-      // GMJ: idx_fil = index of filtration value/simplex
-      // std::cout <<"GMJ!! " << idx_fil << std::endl;
-      // GMJ
       cpx_->assign_key(sh, idx_fil);
       ++idx_fil;
       dsets_.make_set(cpx_->key(sh));
@@ -176,8 +176,13 @@ class Persistent_cohomology {
   void compute_persistent_cohomology(Filtration_value min_interval_length = 0) {
     interval_length_policy.set_length(min_interval_length);
     // Compute all finite intervals
+    //
+
     for (auto sh : cpx_->filtration_simplex_range()) {
       int dim_simplex = cpx_->dimension(sh);
+      // GMJ: tomorrow
+      std::cout << "GMJ RANGE " << dim_simplex << " " << std::endl;
+      //
       switch (dim_simplex) {
         case 0:
           break;
