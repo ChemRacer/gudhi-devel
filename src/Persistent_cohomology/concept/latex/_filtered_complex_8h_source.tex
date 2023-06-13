@@ -1,0 +1,55 @@
+\doxysection{Filtered\+Complex.\+h}
+\hypertarget{_filtered_complex_8h_source}{}\label{_filtered_complex_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ \ \ \ This\ file\ is\ part\ of\ the\ Gudhi\ Library\ -\/\ https://gudhi.inria.fr/\ -\/\ which\ is\ released\ under\ MIT.}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ \ \ \ See\ file\ LICENSE\ or\ go\ to\ https://gudhi.inria.fr/licensing/\ for\ full\ license\ details.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ \ \ \ Author(s):\ \ \ \ \ \ \ Clément\ Maria}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ \ \ Copyright\ (C)\ 2014\ Inria}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \ \ \ Modification(s):}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ \ \ \ \ \ -\/\ YYYY/MM\ Author:\ Description\ of\ the\ modification}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_filtered_complex}{FilteredComplex}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{typedef}\ unspecified\ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\_handle}};}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{typedef}\ unspecified\ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_ac1477ced0adf4b256389ddb156c48839}{Filtration\_value}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{typedef}\ unspecified\ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_ac69f5789debf925ac84045172be19922}{Indexing\_tag}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\_handle}}\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_a50ec5b5f74259d999cdd5c7839bb9032}{null\_simplex}}();}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_ae8548bd915f368cc48eb53fe2ff7d857}{num\_simplices}}();}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_ac36b49c590c493e6b0af8db8444c955e}{dimension}}(\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\_handle}}\ sh);}
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{struct_filtered_complex_ac1477ced0adf4b256389ddb156c48839}{Filtration\_value}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_a208f27fe9776b80ba1f69fac4c5d8d0d}{filtration}}(\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\_handle}}\ sh);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\_handle}}\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_acf930e5adae322e0ae08e07be04fd6d9}{simplex}}\ \ (\ \textcolor{keywordtype}{size\_t}\ idx\ );}
+\DoxyCodeLine{00052\ \textcolor{keyword}{typedef}\ unspecified\ \mbox{\hyperlink{struct_filtered_complex_a013100b08431bdf2d4df411329a776ed}{Boundary\_simplex\_iterator}};}
+\DoxyCodeLine{00057\ \textcolor{keyword}{typedef}\ unspecified\ \mbox{\hyperlink{struct_filtered_complex_a14901af10efe29daaa03f8c995b4f6e3}{Boundary\_simplex\_range}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00069\ \mbox{\hyperlink{struct_filtered_complex_a14901af10efe29daaa03f8c995b4f6e3}{Boundary\_simplex\_range}}\ \mbox{\hyperlink{struct_filtered_complex_ad822a042edec60814717f8697d39fd74}{boundary\_simplex\_range}}(\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\_handle}}\ sh);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{typedef}\ unspecified\ \mbox{\hyperlink{struct_filtered_complex_a10b6557a8b8bef50a05d48775de508a7}{Filtration\_simplex\_iterator}};}
+\DoxyCodeLine{00079\ \textcolor{keyword}{typedef}\ unspecified\ \mbox{\hyperlink{struct_filtered_complex_aa68c0c255253a2bdb53067600ddeba79}{Filtration\_simplex\_range}};}
+\DoxyCodeLine{00083\ \mbox{\hyperlink{struct_filtered_complex_aa68c0c255253a2bdb53067600ddeba79}{Filtration\_simplex\_range}}\ \mbox{\hyperlink{struct_filtered_complex_a705b3248b405cbd64946d21c4a3e4fd2}{filtration\_simplex\_range}}();}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{keyword}{typedef}\ unspecified\ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Simplex\_key}};}
+\DoxyCodeLine{00094\ \ \ \mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Simplex\_key}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_a9ebf60c2c1fc333a3e14be54a312efe0}{null\_key}}\ ();}
+\DoxyCodeLine{00098\ \ \ \mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Simplex\_key}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_abe8ac9d415d2aacf76ab93200a0e03c3}{key}}\ \ \ \ \ \ (\ \mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\_handle}}\ sh\ );}
+\DoxyCodeLine{00102\ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_filtered_complex_a241c0b6a38faa11e6944cb6d87f332a5}{assign\_key}}(\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\_handle}}\ sh,\ \mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Simplex\_key}}\ n);}
+\DoxyCodeLine{00110\ \textcolor{comment}{//typedef\ unspecified\ Complex\_simplex\_iterator;}}
+\DoxyCodeLine{00111\ \textcolor{comment}{//typedef\ unspecified\ Complex\_simplex\_range;}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00114\ \textcolor{comment}{*\ Returns\ a\ range\ over\ all\ the\ simplices\ of\ a}}
+\DoxyCodeLine{00115\ \textcolor{comment}{*\ complex.}}
+\DoxyCodeLine{00116\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00117\ \textcolor{comment}{//Complex\_simplex\_range\ complex\_simplex\_range();}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{comment}{/*************************************************/}\ \ \ \ \ }
+\DoxyCodeLine{00128\ \textcolor{comment}{//int\ is\_before\_in\_filtration(Simplex\_handle\ s,\ Simplex\_handle\ t);}}
+\DoxyCodeLine{00129\ \textcolor{comment}{/*************************************************/}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \};}
+
+\end{DoxyCode}

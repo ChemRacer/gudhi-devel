@@ -1,0 +1,92 @@
+\doxysection{Coefficient\+Field Struct Reference}
+\hypertarget{struct_coefficient_field}{}\label{struct_coefficient_field}\index{CoefficientField@{CoefficientField}}
+
+
+Concept describing the requirements for a class to represent a field of coefficients to compute persistent homology.  
+
+
+
+
+{\ttfamily \#include $<$Coefficient\+Field.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef unspecified \mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}}
+\begin{DoxyCompactList}\small\item\em Type of element of the field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_coefficient_field_a76915f314c404ce02f789c6412f2c7b7}{Coefficient\+Field}} ()
+\item 
+\Hypertarget{struct_coefficient_field_a429c35c95a327ba0fbde7d5b08e6b44b}\label{struct_coefficient_field_a429c35c95a327ba0fbde7d5b08e6b44b} 
+void {\bfseries init} (\mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} charac)
+\item 
+\Hypertarget{struct_coefficient_field_ab447c7db72b8161f5e73af74c2c37418}\label{struct_coefficient_field_ab447c7db72b8161f5e73af74c2c37418} 
+void {\bfseries init} (\mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} charac\+\_\+min, \mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} charac\+\_\+max)
+\item 
+\mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} \mbox{\hyperlink{struct_coefficient_field_ae6579d724aaaaafd982eead6e652342e}{characteristic}} ()
+\item 
+\mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} \mbox{\hyperlink{struct_coefficient_field_a7f7d0aafc4e7da22c0d2fbf346d2d115}{multiplicative\+\_\+identity}} ()
+\item 
+\mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} \mbox{\hyperlink{struct_coefficient_field_a1e2b12c181bde183f06c7cfd85428fef}{additive\+\_\+identity}} ()
+\item 
+void \mbox{\hyperlink{struct_coefficient_field_ae6a961eed5456c200b8732a63c1faca1}{plus\+\_\+equal}} (\mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} x, \mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} y)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Concept describing the requirements for a class to represent a field of coefficients to compute persistent homology. 
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}\label{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da} 
+\index{CoefficientField@{CoefficientField}!Element@{Element}}
+\index{Element@{Element}!CoefficientField@{CoefficientField}}
+\doxysubsubsection{\texorpdfstring{Element}{Element}}
+{\footnotesize\ttfamily typedef unspecified \mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Coefficient\+Field\+::\+Element}}}
+
+
+
+Type of element of the field. 
+
+Must be Assignable. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_coefficient_field_a76915f314c404ce02f789c6412f2c7b7}\label{struct_coefficient_field_a76915f314c404ce02f789c6412f2c7b7} 
+\index{CoefficientField@{CoefficientField}!CoefficientField@{CoefficientField}}
+\index{CoefficientField@{CoefficientField}!CoefficientField@{CoefficientField}}
+\doxysubsubsection{\texorpdfstring{CoefficientField()}{CoefficientField()}}
+{\footnotesize\ttfamily Coefficient\+Field\+::\+Coefficient\+Field (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Default constructible. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_coefficient_field_a1e2b12c181bde183f06c7cfd85428fef}\label{struct_coefficient_field_a1e2b12c181bde183f06c7cfd85428fef} 
+\index{CoefficientField@{CoefficientField}!additive\_identity@{additive\_identity}}
+\index{additive\_identity@{additive\_identity}!CoefficientField@{CoefficientField}}
+\doxysubsubsection{\texorpdfstring{additive\_identity()}{additive\_identity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} Coefficient\+Field\+::additive\+\_\+identity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Return the element 0 of the field. \Hypertarget{struct_coefficient_field_ae6579d724aaaaafd982eead6e652342e}\label{struct_coefficient_field_ae6579d724aaaaafd982eead6e652342e} 
+\index{CoefficientField@{CoefficientField}!characteristic@{characteristic}}
+\index{characteristic@{characteristic}!CoefficientField@{CoefficientField}}
+\doxysubsubsection{\texorpdfstring{characteristic()}{characteristic()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} Coefficient\+Field\+::characteristic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Return the characteristic of the field. \Hypertarget{struct_coefficient_field_a7f7d0aafc4e7da22c0d2fbf346d2d115}\label{struct_coefficient_field_a7f7d0aafc4e7da22c0d2fbf346d2d115} 
+\index{CoefficientField@{CoefficientField}!multiplicative\_identity@{multiplicative\_identity}}
+\index{multiplicative\_identity@{multiplicative\_identity}!CoefficientField@{CoefficientField}}
+\doxysubsubsection{\texorpdfstring{multiplicative\_identity()}{multiplicative\_identity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}} Coefficient\+Field\+::multiplicative\+\_\+identity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Return the element 1 of the field. \Hypertarget{struct_coefficient_field_ae6a961eed5456c200b8732a63c1faca1}\label{struct_coefficient_field_ae6a961eed5456c200b8732a63c1faca1} 
+\index{CoefficientField@{CoefficientField}!plus\_equal@{plus\_equal}}
+\index{plus\_equal@{plus\_equal}!CoefficientField@{CoefficientField}}
+\doxysubsubsection{\texorpdfstring{plus\_equal()}{plus\_equal()}}
+{\footnotesize\ttfamily void Coefficient\+Field\+::plus\+\_\+equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}}}]{x,  }\item[{\mbox{\hyperlink{struct_coefficient_field_aae7ca3975c2ee8a72dcf1a48617d84da}{Element}}}]{y }\end{DoxyParamCaption})}
+
+Assign\+: x \texorpdfstring{$<$}{<}-\/ x + y 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Coefficient\+Field.\+h\end{DoxyCompactItemize}

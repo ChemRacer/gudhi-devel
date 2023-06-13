@@ -1,0 +1,217 @@
+\doxysection{Filtered\+Complex Struct Reference}
+\hypertarget{struct_filtered_complex}{}\label{struct_filtered_complex}\index{FilteredComplex@{FilteredComplex}}
+
+
+The concept \doxylink{struct_filtered_complex}{Filtered\+Complex} describes the requirements for a type to implement a filtered cell complex, from which one can compute persistent homology via a model of the concept \doxylink{struct_persistent_homology}{Persistent\+Homology}.  
+
+
+
+
+{\ttfamily \#include $<$Filtered\+Complex.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}\label{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc} 
+typedef unspecified {\bfseries Simplex\+\_\+handle}
+\begin{DoxyCompactList}\small\item\em Handle to specify a simplex. \end{DoxyCompactList}\item 
+typedef unspecified \mbox{\hyperlink{struct_filtered_complex_ac1477ced0adf4b256389ddb156c48839}{Filtration\+\_\+value}}
+\begin{DoxyCompactList}\small\item\em Type for the value of the filtration function. \end{DoxyCompactList}\item 
+typedef unspecified \mbox{\hyperlink{struct_filtered_complex_ac69f5789debf925ac84045172be19922}{Indexing\+\_\+tag}}
+\begin{DoxyCompactList}\small\item\em Specifies the nature of the indexing scheme. \end{DoxyCompactList}\item 
+typedef unspecified \mbox{\hyperlink{struct_filtered_complex_a013100b08431bdf2d4df411329a776ed}{Boundary\+\_\+simplex\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Iterator on the simplices belonging to the boundary of a simplex. \end{DoxyCompactList}\item 
+typedef unspecified \mbox{\hyperlink{struct_filtered_complex_a14901af10efe29daaa03f8c995b4f6e3}{Boundary\+\_\+simplex\+\_\+range}}
+\begin{DoxyCompactList}\small\item\em Range giving access to the simplices in the boundary of a simplex. \end{DoxyCompactList}\item 
+typedef unspecified \mbox{\hyperlink{struct_filtered_complex_a10b6557a8b8bef50a05d48775de508a7}{Filtration\+\_\+simplex\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Iterator over all simplices of the complex in the order of the indexing scheme. \end{DoxyCompactList}\item 
+typedef unspecified \mbox{\hyperlink{struct_filtered_complex_aa68c0c255253a2bdb53067600ddeba79}{Filtration\+\_\+simplex\+\_\+range}}
+\begin{DoxyCompactList}\small\item\em Range over the simplices of the complex in the order of the filtration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_filtered_complex_a50ec5b5f74259d999cdd5c7839bb9032}\label{struct_filtered_complex_a50ec5b5f74259d999cdd5c7839bb9032} 
+\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}} {\bfseries null\+\_\+simplex} ()
+\begin{DoxyCompactList}\small\item\em Returns a Simplex\+\_\+handle that is different from all simplex handles of the simplices. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{struct_filtered_complex_ae8548bd915f368cc48eb53fe2ff7d857}{num\+\_\+simplices}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of simplices in the complex. \end{DoxyCompactList}\item 
+\Hypertarget{struct_filtered_complex_ac36b49c590c493e6b0af8db8444c955e}\label{struct_filtered_complex_ac36b49c590c493e6b0af8db8444c955e} 
+int {\bfseries dimension} (\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}} sh)
+\begin{DoxyCompactList}\small\item\em Returns the dimension of a simplex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_filtered_complex_ac1477ced0adf4b256389ddb156c48839}{Filtration\+\_\+value}} \mbox{\hyperlink{struct_filtered_complex_a208f27fe9776b80ba1f69fac4c5d8d0d}{filtration}} (\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}} sh)
+\begin{DoxyCompactList}\small\item\em Returns the filtration value of a simplex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}} \mbox{\hyperlink{struct_filtered_complex_acf930e5adae322e0ae08e07be04fd6d9}{simplex}} (size\+\_\+t idx)
+\begin{DoxyCompactList}\small\item\em Returns the simplex that has index idx in the filtration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_filtered_complex_a14901af10efe29daaa03f8c995b4f6e3}{Boundary\+\_\+simplex\+\_\+range}} \mbox{\hyperlink{struct_filtered_complex_ad822a042edec60814717f8697d39fd74}{boundary\+\_\+simplex\+\_\+range}} (\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}} sh)
+\begin{DoxyCompactList}\small\item\em Returns a range giving access to all simplices of the boundary of a simplex, i.\+e. the set of codimension 1 subsimplices of the Simplex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_filtered_complex_aa68c0c255253a2bdb53067600ddeba79}{Filtration\+\_\+simplex\+\_\+range}} \mbox{\hyperlink{struct_filtered_complex_a705b3248b405cbd64946d21c4a3e4fd2}{filtration\+\_\+simplex\+\_\+range}} ()
+\begin{DoxyCompactList}\small\item\em Returns a range over the simplices of the complex in the order of the filtration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Map interface}
+Conceptually a {\ttfamily std\+::unordered\+\_\+map\texorpdfstring{$<$}{<}Simplex\+\_\+handle,std\+::size\+\_\+t\texorpdfstring{$>$}{>}}. \begin{DoxyCompactItemize}
+\item 
+typedef unspecified \mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Simplex\+\_\+key}}
+\begin{DoxyCompactList}\small\item\em Data stored for each simplex. \end{DoxyCompactList}\item 
+\Hypertarget{struct_filtered_complex_a9ebf60c2c1fc333a3e14be54a312efe0}\label{struct_filtered_complex_a9ebf60c2c1fc333a3e14be54a312efe0} 
+\mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Simplex\+\_\+key}} {\bfseries null\+\_\+key} ()
+\begin{DoxyCompactList}\small\item\em Returns a constant dummy number that is either negative, or at least as large as {\ttfamily \doxylink{struct_filtered_complex_ae8548bd915f368cc48eb53fe2ff7d857}{num\+\_\+simplices()}}. Suggested value\+: -\/1. ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Simplex\+\_\+key}} \mbox{\hyperlink{struct_filtered_complex_abe8ac9d415d2aacf76ab93200a0e03c3}{key}} (\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}} sh)
+\begin{DoxyCompactList}\small\item\em Returns the number stored for a simplex by {\ttfamily assign\+\_\+key}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{struct_filtered_complex_a241c0b6a38faa11e6944cb6d87f332a5}{assign\+\_\+key}} (\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}} sh, \mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Simplex\+\_\+key}} n)
+\begin{DoxyCompactList}\small\item\em Store a number for a simplex, which can later be retrieved with {\ttfamily key(sh)}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The concept \doxylink{struct_filtered_complex}{Filtered\+Complex} describes the requirements for a type to implement a filtered cell complex, from which one can compute persistent homology via a model of the concept \doxylink{struct_persistent_homology}{Persistent\+Homology}. 
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{struct_filtered_complex_a013100b08431bdf2d4df411329a776ed}\label{struct_filtered_complex_a013100b08431bdf2d4df411329a776ed} 
+\index{FilteredComplex@{FilteredComplex}!Boundary\_simplex\_iterator@{Boundary\_simplex\_iterator}}
+\index{Boundary\_simplex\_iterator@{Boundary\_simplex\_iterator}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{Boundary\_simplex\_iterator}{Boundary\_simplex\_iterator}}
+{\footnotesize\ttfamily typedef unspecified \mbox{\hyperlink{struct_filtered_complex_a013100b08431bdf2d4df411329a776ed}{Filtered\+Complex\+::\+Boundary\+\_\+simplex\+\_\+iterator}}}
+
+
+
+Iterator on the simplices belonging to the boundary of a simplex. 
+
+{\ttfamily value\+\_\+type} must be \textquotesingle{}Simplex\+\_\+handle\textquotesingle{}. \Hypertarget{struct_filtered_complex_a14901af10efe29daaa03f8c995b4f6e3}\label{struct_filtered_complex_a14901af10efe29daaa03f8c995b4f6e3} 
+\index{FilteredComplex@{FilteredComplex}!Boundary\_simplex\_range@{Boundary\_simplex\_range}}
+\index{Boundary\_simplex\_range@{Boundary\_simplex\_range}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{Boundary\_simplex\_range}{Boundary\_simplex\_range}}
+{\footnotesize\ttfamily typedef unspecified \mbox{\hyperlink{struct_filtered_complex_a14901af10efe29daaa03f8c995b4f6e3}{Filtered\+Complex\+::\+Boundary\+\_\+simplex\+\_\+range}}}
+
+
+
+Range giving access to the simplices in the boundary of a simplex. 
+
+.begin() and .end() return type Boundary\+\_\+simplex\+\_\+iterator. \Hypertarget{struct_filtered_complex_a10b6557a8b8bef50a05d48775de508a7}\label{struct_filtered_complex_a10b6557a8b8bef50a05d48775de508a7} 
+\index{FilteredComplex@{FilteredComplex}!Filtration\_simplex\_iterator@{Filtration\_simplex\_iterator}}
+\index{Filtration\_simplex\_iterator@{Filtration\_simplex\_iterator}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{Filtration\_simplex\_iterator}{Filtration\_simplex\_iterator}}
+{\footnotesize\ttfamily typedef unspecified \mbox{\hyperlink{struct_filtered_complex_a10b6557a8b8bef50a05d48775de508a7}{Filtered\+Complex\+::\+Filtration\+\_\+simplex\+\_\+iterator}}}
+
+
+
+Iterator over all simplices of the complex in the order of the indexing scheme. 
+
+\textquotesingle{}value\+\_\+type\textquotesingle{} must be \textquotesingle{}Simplex\+\_\+handle\textquotesingle{}. \Hypertarget{struct_filtered_complex_aa68c0c255253a2bdb53067600ddeba79}\label{struct_filtered_complex_aa68c0c255253a2bdb53067600ddeba79} 
+\index{FilteredComplex@{FilteredComplex}!Filtration\_simplex\_range@{Filtration\_simplex\_range}}
+\index{Filtration\_simplex\_range@{Filtration\_simplex\_range}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{Filtration\_simplex\_range}{Filtration\_simplex\_range}}
+{\footnotesize\ttfamily typedef unspecified \mbox{\hyperlink{struct_filtered_complex_aa68c0c255253a2bdb53067600ddeba79}{Filtered\+Complex\+::\+Filtration\+\_\+simplex\+\_\+range}}}
+
+
+
+Range over the simplices of the complex in the order of the filtration. 
+
+.begin() and .end() return type Filtration\+\_\+simplex\+\_\+iterator. \Hypertarget{struct_filtered_complex_ac1477ced0adf4b256389ddb156c48839}\label{struct_filtered_complex_ac1477ced0adf4b256389ddb156c48839} 
+\index{FilteredComplex@{FilteredComplex}!Filtration\_value@{Filtration\_value}}
+\index{Filtration\_value@{Filtration\_value}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{Filtration\_value}{Filtration\_value}}
+{\footnotesize\ttfamily typedef unspecified \mbox{\hyperlink{struct_filtered_complex_ac1477ced0adf4b256389ddb156c48839}{Filtered\+Complex\+::\+Filtration\+\_\+value}}}
+
+
+
+Type for the value of the filtration function. 
+
+Must be comparable with \texorpdfstring{$<$}{<}. \Hypertarget{struct_filtered_complex_ac69f5789debf925ac84045172be19922}\label{struct_filtered_complex_ac69f5789debf925ac84045172be19922} 
+\index{FilteredComplex@{FilteredComplex}!Indexing\_tag@{Indexing\_tag}}
+\index{Indexing\_tag@{Indexing\_tag}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{Indexing\_tag}{Indexing\_tag}}
+{\footnotesize\ttfamily typedef unspecified \mbox{\hyperlink{struct_filtered_complex_ac69f5789debf925ac84045172be19922}{Filtered\+Complex\+::\+Indexing\+\_\+tag}}}
+
+
+
+Specifies the nature of the indexing scheme. 
+
+is model of Indexing\+Tag. \Hypertarget{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}\label{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990} 
+\index{FilteredComplex@{FilteredComplex}!Simplex\_key@{Simplex\_key}}
+\index{Simplex\_key@{Simplex\_key}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{Simplex\_key}{Simplex\_key}}
+{\footnotesize\ttfamily typedef unspecified \mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Filtered\+Complex\+::\+Simplex\+\_\+key}}}
+
+
+
+Data stored for each simplex. 
+
+Must be an integer type. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_filtered_complex_a241c0b6a38faa11e6944cb6d87f332a5}\label{struct_filtered_complex_a241c0b6a38faa11e6944cb6d87f332a5} 
+\index{FilteredComplex@{FilteredComplex}!assign\_key@{assign\_key}}
+\index{assign\_key@{assign\_key}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{assign\_key()}{assign\_key()}}
+{\footnotesize\ttfamily void Filtered\+Complex\+::assign\+\_\+key (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}}}]{sh,  }\item[{\mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Simplex\+\_\+key}}}]{n }\end{DoxyParamCaption})}
+
+
+
+Store a number for a simplex, which can later be retrieved with {\ttfamily key(sh)}. 
+
+This is never called on \doxylink{struct_filtered_complex_a50ec5b5f74259d999cdd5c7839bb9032}{null\+\_\+simplex()}. \Hypertarget{struct_filtered_complex_ad822a042edec60814717f8697d39fd74}\label{struct_filtered_complex_ad822a042edec60814717f8697d39fd74} 
+\index{FilteredComplex@{FilteredComplex}!boundary\_simplex\_range@{boundary\_simplex\_range}}
+\index{boundary\_simplex\_range@{boundary\_simplex\_range}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{boundary\_simplex\_range()}{boundary\_simplex\_range()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_filtered_complex_a14901af10efe29daaa03f8c995b4f6e3}{Boundary\+\_\+simplex\+\_\+range}} Filtered\+Complex\+::boundary\+\_\+simplex\+\_\+range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}}}]{sh }\end{DoxyParamCaption})}
+
+
+
+Returns a range giving access to all simplices of the boundary of a simplex, i.\+e. the set of codimension 1 subsimplices of the Simplex. 
+
+If the simplex is $[v_0, \cdots ,v_d]$, with canonical orientation induced by $ v_0 < \cdots < v_d $, the iterator enumerates the simplices of the boundary in the order\+: $[v_0,\cdots,\widehat{v_i},\cdots,v_d]$ for $i$ from 0 to d
+
+We note that the alternate sum of the simplices given by the iterator gives the chains corresponding to the boundary of the simplex. \Hypertarget{struct_filtered_complex_a208f27fe9776b80ba1f69fac4c5d8d0d}\label{struct_filtered_complex_a208f27fe9776b80ba1f69fac4c5d8d0d} 
+\index{FilteredComplex@{FilteredComplex}!filtration@{filtration}}
+\index{filtration@{filtration}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{filtration()}{filtration()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_filtered_complex_ac1477ced0adf4b256389ddb156c48839}{Filtration\+\_\+value}} Filtered\+Complex\+::filtration (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}}}]{sh }\end{DoxyParamCaption})}
+
+
+
+Returns the filtration value of a simplex. 
+
+If sh is \doxylink{struct_filtered_complex_a50ec5b5f74259d999cdd5c7839bb9032}{null\+\_\+simplex()}, returns the maximal value of the filtration function on the complex. \Hypertarget{struct_filtered_complex_a705b3248b405cbd64946d21c4a3e4fd2}\label{struct_filtered_complex_a705b3248b405cbd64946d21c4a3e4fd2} 
+\index{FilteredComplex@{FilteredComplex}!filtration\_simplex\_range@{filtration\_simplex\_range}}
+\index{filtration\_simplex\_range@{filtration\_simplex\_range}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{filtration\_simplex\_range()}{filtration\_simplex\_range()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_filtered_complex_aa68c0c255253a2bdb53067600ddeba79}{Filtration\+\_\+simplex\+\_\+range}} Filtered\+Complex\+::filtration\+\_\+simplex\+\_\+range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a range over the simplices of the complex in the order of the filtration. 
+
+.begin() and .end() return type Filtration\+\_\+simplex\+\_\+iterator. \Hypertarget{struct_filtered_complex_abe8ac9d415d2aacf76ab93200a0e03c3}\label{struct_filtered_complex_abe8ac9d415d2aacf76ab93200a0e03c3} 
+\index{FilteredComplex@{FilteredComplex}!key@{key}}
+\index{key@{key}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{key()}{key()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_filtered_complex_a1facc21f85218b524506b8ceeb5a1990}{Simplex\+\_\+key}} Filtered\+Complex\+::key (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}}}]{sh }\end{DoxyParamCaption})}
+
+
+
+Returns the number stored for a simplex by {\ttfamily assign\+\_\+key}. 
+
+This is never called on \doxylink{struct_filtered_complex_a50ec5b5f74259d999cdd5c7839bb9032}{null\+\_\+simplex()}. \Hypertarget{struct_filtered_complex_ae8548bd915f368cc48eb53fe2ff7d857}\label{struct_filtered_complex_ae8548bd915f368cc48eb53fe2ff7d857} 
+\index{FilteredComplex@{FilteredComplex}!num\_simplices@{num\_simplices}}
+\index{num\_simplices@{num\_simplices}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{num\_simplices()}{num\_simplices()}}
+{\footnotesize\ttfamily size\+\_\+t Filtered\+Complex\+::num\+\_\+simplices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the number of simplices in the complex. 
+
+Does not count the empty simplex. \Hypertarget{struct_filtered_complex_acf930e5adae322e0ae08e07be04fd6d9}\label{struct_filtered_complex_acf930e5adae322e0ae08e07be04fd6d9} 
+\index{FilteredComplex@{FilteredComplex}!simplex@{simplex}}
+\index{simplex@{simplex}!FilteredComplex@{FilteredComplex}}
+\doxysubsubsection{\texorpdfstring{simplex()}{simplex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_filtered_complex_a751d3bdb668278af0685c6e1482aacdc}{Simplex\+\_\+handle}} Filtered\+Complex\+::simplex (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{idx }\end{DoxyParamCaption})}
+
+
+
+Returns the simplex that has index idx in the filtration. 
+
+This is only called on valid indices. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Filtered\+Complex.\+h\end{DoxyCompactItemize}

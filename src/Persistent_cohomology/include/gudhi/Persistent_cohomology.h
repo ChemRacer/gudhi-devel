@@ -177,12 +177,8 @@ class Persistent_cohomology {
     interval_length_policy.set_length(min_interval_length);
     // Compute all finite intervals
     //
-
     for (auto sh : cpx_->filtration_simplex_range()) {
       int dim_simplex = cpx_->dimension(sh);
-      // GMJ: tomorrow
-      std::cout << "GMJ RANGE " << dim_simplex << " " << std::endl;
-      //
       switch (dim_simplex) {
         case 0:
           break;
@@ -223,10 +219,12 @@ class Persistent_cohomology {
    * explains the existence of a specific function of edge insertions. */
   void update_cohomology_groups_edge(Simplex_handle sigma) {
     Simplex_handle u, v;
+
     boost::tie(u, v) = cpx_->endpoints(sigma);
 
     Simplex_key ku = dsets_.find_set(cpx_->key(u));
     Simplex_key kv = dsets_.find_set(cpx_->key(v));
+
 
     if (ku != kv) {        // Destroy a connected component
       dsets_.link(ku, kv);
@@ -322,7 +320,6 @@ class Persistent_cohomology {
     // Sum the annotations with multiplicity, using a map<key,coeff>
     // to represent a sparse vector.
     std::pair<typename std::map<Simplex_key, Arith_element>::iterator, bool> result_insert_a_ds;
-
     for (auto ann_it = annotations_in_boundary.begin(); ann_it != annotations_in_boundary.end(); /**/) {
       Column* col = ann_it->first;
       int mult = ann_it->second;
