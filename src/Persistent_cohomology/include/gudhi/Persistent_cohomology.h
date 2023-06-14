@@ -194,7 +194,6 @@ class Persistent_cohomology {
     Simplex_key key;
     for (auto v_sh : cpx_->skeleton_simplex_range(0)) {  // for all 0-dimensional simplices
       key = cpx_->key(v_sh);
-
       if (ds_parent_[key] == key  // root of its tree
       && zero_cocycles_.find(key) == zero_cocycles_.end()) {
         persistent_pairs_.emplace_back(
@@ -225,7 +224,6 @@ class Persistent_cohomology {
     Simplex_key ku = dsets_.find_set(cpx_->key(u));
     Simplex_key kv = dsets_.find_set(cpx_->key(v));
 
-
     if (ku != kv) {        // Destroy a connected component
       dsets_.link(ku, kv);
       // Keys of the simplices which created the connected components containing
@@ -246,7 +244,9 @@ class Persistent_cohomology {
       } else {
         idx_coc_v = map_it_v->second;
       }
-
+      //GMJ
+      std::cout << typeid(cpx_->simplex(idx_coc_u)).name() << std::endl;
+      //GMJ
       if (cpx_->filtration(cpx_->simplex(idx_coc_u))
           < cpx_->filtration(cpx_->simplex(idx_coc_v))) {  // Kill cocycle [idx_coc_v], which is younger.
         if (interval_length_policy(cpx_->simplex(idx_coc_v), sigma)) {
