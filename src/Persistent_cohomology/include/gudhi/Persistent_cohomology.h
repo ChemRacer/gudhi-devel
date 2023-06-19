@@ -244,9 +244,6 @@ class Persistent_cohomology {
       } else {
         idx_coc_v = map_it_v->second;
       }
-      //GMJ
-      std::cout << typeid(cpx_->simplex(idx_coc_u)).name() << std::endl;
-      //GMJ
       if (cpx_->filtration(cpx_->simplex(idx_coc_u))
           < cpx_->filtration(cpx_->simplex(idx_coc_v))) {  // Kill cocycle [idx_coc_v], which is younger.
         if (interval_length_policy(cpx_->simplex(idx_coc_v), sigma)) {
