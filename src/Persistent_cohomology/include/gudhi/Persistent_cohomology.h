@@ -183,6 +183,10 @@ class Persistent_cohomology {
         case 0:
           break;
         case 1:
+          // GMJ: simplex dimension
+          std::cout << " "<<  std::endl;
+          std::cout << "Dim simplex "<< dim_simplex << std::endl;
+          // GMJD
           update_cohomology_groups_edge(sh);
           break;
         default:
@@ -198,6 +202,7 @@ class Persistent_cohomology {
       && zero_cocycles_.find(key) == zero_cocycles_.end()) {
         persistent_pairs_.emplace_back(
             cpx_->simplex(key), cpx_->null_simplex(), coeff_field_.characteristic());
+
       }
     }
     for (auto zero_idx : zero_cocycles_) {
@@ -223,20 +228,28 @@ class Persistent_cohomology {
 
     Simplex_key ku = dsets_.find_set(cpx_->key(u));
     Simplex_key kv = dsets_.find_set(cpx_->key(v));
+    // GMJ: update_cohomology_groups_edge
+    std::cout << "Update dim 1 "<< ku << " " << kv << std::endl;
+    // GMJ
 
     if (ku != kv) {        // Destroy a connected component
+      // GMJ: destroy connected component
+      std::cout << "destroy and link "<< ku << " " << kv << std::endl;
+      // GMJ
       dsets_.link(ku, kv);
       // Keys of the simplices which created the connected components containing
       // respectively u and v.
       Simplex_key idx_coc_u, idx_coc_v;
 
       auto map_it_u = zero_cocycles_.find(ku);
+
       // If the index of the cocycle representing the class is already ku.
       if (map_it_u == zero_cocycles_.end()) {
         idx_coc_u = ku;
       } else {
         idx_coc_u = map_it_u->second;
       }
+
 
 
       auto map_it_v = zero_cocycles_.find(kv);
@@ -246,6 +259,12 @@ class Persistent_cohomology {
       } else {
         idx_coc_v = map_it_v->second;
       }
+      // GMJ: destroy connected component
+      std::cout << "ku "<< idx_coc_u << std::endl;
+      std::cout << "kv "<< idx_coc_v << std::endl;
+      std::cout << " "<<  std::endl;
+      // GMJ
+
       if (cpx_->filtration(cpx_->simplex(idx_coc_u))
           < cpx_->filtration(cpx_->simplex(idx_coc_v))) {  // Kill cocycle [idx_coc_v], which is younger.
         if (interval_length_policy(cpx_->simplex(idx_coc_v), sigma)) {
@@ -277,6 +296,7 @@ class Persistent_cohomology {
           }
           zero_cocycles_[ku] = idx_coc_v;
         }
+
       }
       cpx_->assign_key(sigma, cpx_->null_key());
     } else if (dim_max_ > 1) {  // If ku == kv, same connected component: create a 1-cocycle class.
@@ -394,6 +414,7 @@ class Persistent_cohomology {
    * where it worths 1.*/
   void create_cocycle(Simplex_handle sigma, Arith_element x,
                       Arith_element charac) {
+    // GMJ sigma, multiplicative_identity, characteristic
     Simplex_key key = cpx_->key(sigma);
     // Create a column containing only one cell,
     Column * new_col = column_pool_.construct(key);
