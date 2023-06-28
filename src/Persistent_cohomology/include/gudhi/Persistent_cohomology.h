@@ -184,8 +184,8 @@ class Persistent_cohomology {
           break;
         case 1:
           // GMJ: simplex dimension
-          std::cout << " "<<  std::endl;
-          std::cout << "Dim simplex "<< dim_simplex << std::endl;
+          // std::cout << " "<<  std::endl;
+          // std::cout << "Dim simplex "<< dim_simplex << std::endl;
           // GMJD
           update_cohomology_groups_edge(sh);
           break;
@@ -229,12 +229,12 @@ class Persistent_cohomology {
     Simplex_key ku = dsets_.find_set(cpx_->key(u));
     Simplex_key kv = dsets_.find_set(cpx_->key(v));
     // GMJ: update_cohomology_groups_edge
-    std::cout << "Update dim 1 "<< ku << " " << kv << std::endl;
+    //std::cout << "Update dim 1 "<< ku << " " << kv << std::endl;
     // GMJ
 
     if (ku != kv) {        // Destroy a connected component
       // GMJ: destroy connected component
-      std::cout << "destroy and link "<< ku << " " << kv << std::endl;
+      // std::cout << "destroy and link "<< ku << " " << kv << std::endl;
       // GMJ
       dsets_.link(ku, kv);
       // Keys of the simplices which created the connected components containing
@@ -260,9 +260,9 @@ class Persistent_cohomology {
         idx_coc_v = map_it_v->second;
       }
       // GMJ: destroy connected component
-      std::cout << "ku "<< idx_coc_u << std::endl;
-      std::cout << "kv "<< idx_coc_v << std::endl;
-      std::cout << " "<<  std::endl;
+      // std::cout << "ku "<< idx_coc_u << std::endl;
+      // std::cout << "kv "<< idx_coc_v << std::endl;
+      // std::cout << " "<<  std::endl;
       // GMJ
 
       if (cpx_->filtration(cpx_->simplex(idx_coc_u))
@@ -414,7 +414,6 @@ class Persistent_cohomology {
    * where it worths 1.*/
   void create_cocycle(Simplex_handle sigma, Arith_element x,
                       Arith_element charac) {
-    // GMJ sigma, multiplicative_identity, characteristic
     Simplex_key key = cpx_->key(sigma);
     // Create a column containing only one cell,
     Column * new_col = column_pool_.construct(key);

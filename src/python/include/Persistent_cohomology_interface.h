@@ -63,9 +63,9 @@ persistent_cohomology::Persistent_cohomology<FilteredComplex, persistent_cohomol
     persistence.reserve(persistent_pairs.size());
     for (auto pair : persistent_pairs) {
       // gmj: Sorted by death
-      std::cout << "persistence dimension " << stptr_->dimension(get<0>(pair)) << std::endl;
-      std::cout << "persistence pair " << stptr_->filtration(get<0>(pair))<< " " << stptr_->filtration(get<1>(pair)) << std::endl;
-      std::cout << " " << std::endl;
+      // std::cout << "persistence dimension " << stptr_->dimension(get<0>(pair)) << std::endl;
+      // std::cout << "persistence pair " << stptr_->filtration(get<0>(pair))<< " " << stptr_->filtration(get<1>(pair)) << std::endl;
+      // std::cout << " " << std::endl;
       // gmj
       persistence.emplace_back(stptr_->dimension(get<0>(pair)),
                                std::make_pair(stptr_->filtration(get<0>(pair)),
