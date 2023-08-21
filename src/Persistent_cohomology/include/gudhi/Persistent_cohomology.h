@@ -228,13 +228,13 @@ class Persistent_cohomology {
 
     Simplex_key ku = dsets_.find_set(cpx_->key(u));
     Simplex_key kv = dsets_.find_set(cpx_->key(v));
-    // GMJ: update_cohomology_groups_edge
-    //std::cout << "Update dim 1 "<< ku << " " << kv << std::endl;
-    // GMJ
 
     if (ku != kv) {        // Destroy a connected component
       // GMJ: destroy connected component
-      // std::cout << "destroy and link "<< ku << " " << kv << std::endl;
+      //std::cout << "complex " << typeid(cpx_).name() << std::endl;
+      //std::cout << "u  "<< cpx_->key(u) << std::endl;
+      //std::cout << "v  "<< cpx_->key(v) << std::endl;
+      //std::cout << "destroy and link "<< ku << " " << kv << std::endl;
       // GMJ
       dsets_.link(ku, kv);
       // Keys of the simplices which created the connected components containing
@@ -756,6 +756,7 @@ class Persistent_cohomology {
   std::map<Simplex_key, cocycle> transverse_idx_;
   /* Persistent intervals. */
   std::vector<Persistent_interval> persistent_pairs_;
+
   length_interval interval_length_policy;
 
   Simple_object_pool<Column> column_pool_;
