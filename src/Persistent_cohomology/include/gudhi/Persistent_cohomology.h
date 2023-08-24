@@ -183,10 +183,6 @@ class Persistent_cohomology {
         case 0:
           break;
         case 1:
-          // GMJ: simplex dimension
-          // std::cout << " "<<  std::endl;
-          // std::cout << "Dim simplex "<< dim_simplex << std::endl;
-          // GMJD
           update_cohomology_groups_edge(sh);
           break;
         default:
