@@ -198,7 +198,6 @@ class Persistent_cohomology {
       && zero_cocycles_.find(key) == zero_cocycles_.end()) {
         persistent_pairs_.emplace_back(
             cpx_->simplex(key), cpx_->null_simplex(), coeff_field_.characteristic());
-
       }
     }
     for (auto zero_idx : zero_cocycles_) {
@@ -226,12 +225,6 @@ class Persistent_cohomology {
     Simplex_key kv = dsets_.find_set(cpx_->key(v));
 
     if (ku != kv) {        // Destroy a connected component
-      // GMJ: destroy connected component
-      //std::cout << "complex " << typeid(cpx_).name() << std::endl;
-      //std::cout << "u  "<< cpx_->key(u) << std::endl;
-      //std::cout << "v  "<< cpx_->key(v) << std::endl;
-      //std::cout << "destroy and link "<< ku << " " << kv << std::endl;
-      // GMJ
       dsets_.link(ku, kv);
       // Keys of the simplices which created the connected components containing
       // respectively u and v.
@@ -255,11 +248,6 @@ class Persistent_cohomology {
       } else {
         idx_coc_v = map_it_v->second;
       }
-      // GMJ: destroy connected component
-      // std::cout << "ku "<< idx_coc_u << std::endl;
-      // std::cout << "kv "<< idx_coc_v << std::endl;
-      // std::cout << " "<<  std::endl;
-      // GMJ
 
       if (cpx_->filtration(cpx_->simplex(idx_coc_u))
           < cpx_->filtration(cpx_->simplex(idx_coc_v))) {  // Kill cocycle [idx_coc_v], which is younger.
@@ -305,7 +293,8 @@ class Persistent_cohomology {
    */
   void annotation_of_the_boundary(
       std::map<Simplex_key, Arith_element> & map_a_ds, Simplex_handle sigma,
-      int dim_sigma) {
+      int dim_sigma 
+      ) {
     // traverses the boundary of sigma, keeps track of the annotation vectors,
     // with multiplicity. We used to sum the coefficients directly in
     // annotations_in_boundary by using a map, we now do it later.
@@ -596,7 +585,6 @@ class Persistent_cohomology {
     std::sort(std::begin(persistent_pairs_), std::end(persistent_pairs_), cmp);
     for (auto pair : persistent_pairs_) {
       diagram_out << cpx_->dimension(get<0>(pair)) << " "
-            << cpx_->filtration(get<0>(pair)) << " "
             << cpx_->filtration(get<1>(pair)) << std::endl;
     }
   }
@@ -626,6 +614,9 @@ class Persistent_cohomology {
    *
    */
   int betti_number(int dimension) const {
+    // GMJ
+    std::cout << "BETTI!!" << std::endl;
+    // GMJ
     int betti_number = 0;
 
     for (auto pair : persistent_pairs_) {
@@ -638,6 +629,21 @@ class Persistent_cohomology {
       }
     }
     return betti_number;
+  }
+  
+
+  /** @brief Returns input (dummy function)
+   *  @param[in] Integer value
+   *  @return The input integer value 
+   */
+  int gmj_boundary() const {
+    // GMJ
+    std::cout << "GMJ TEST " << std::endl;
+    // GMJ
+    for (auto pair : persistent_pairs_) {
+      std::cout << get<0>(pair) << " " << get<1>(pair) <<std::endl;
+    }
+    return 0;
   }
 
   /** @brief Returns the persistent Betti numbers.

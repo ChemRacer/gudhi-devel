@@ -108,12 +108,6 @@ class Persistent_cohomology_column : public boost::intrusive::set_base_hook<
       if (it1->key_ == it2->key_) {
         if (it1->coefficient_ == it2->coefficient_) {
           //GMJ This is where it does the comparison
-          std::cout << "it1 " << it1->key_ << std::endl;
-          std::cout << "it2 " << it2->key_ << std::endl;
-          std::cout << "Step " << std::endl; 
-          std::cout << "it1 coefficients" << it1->coefficient_ << std::endl;
-          std::cout << "it2 coefficients" << it2->coefficient_ << std::endl;
-          //GMJ
           ++it1;
           ++it2;
         } else {
