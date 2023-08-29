@@ -43,6 +43,26 @@ if(DOXYGEN_FOUND)
     set(GUDHI_DOXYGEN_COMMON_DOC_PATH "${GUDHI_DOXYGEN_SOURCE_PREFIX}/doc/common")
     set(GUDHI_DOXYGEN_UTILS_PATH "utilities/*")
   endif()
+  
+  # GMJ:
+  # Hack for custom program!
+  if (CMAKE_PROJECT_NAME STREQUAL "gmj_test")
+    # Set Doxyfile.in variables for the user version
+    set(GUDHI_DOXYGEN_SOURCE_PREFIX "${PATH_TO_GUDHI}/src")
+    foreach(GUDHI_MODULE ${GUDHI_MODULES_FULL_LIST})
+      if(EXISTS "${GUDHI_DOXYGEN_SOURCE_PREFIX}/doc/${GUDHI_MODULE}")
+        set(GUDHI_DOXYGEN_IMAGE_PATH "${GUDHI_DOXYGEN_IMAGE_PATH}    ${GUDHI_DOXYGEN_SOURCE_PREFIX}/doc/${GUDHI_MODULE}/ \\  \n")
+      endif()
+      if(EXISTS "${GUDHI_DOXYGEN_SOURCE_PREFIX}/example/${GUDHI_MODULE}")
+        set(GUDHI_DOXYGEN_EXAMPLE_PATH "${GUDHI_DOXYGEN_EXAMPLE_PATH}    ${GUDHI_DOXYGEN_SOURCE_PREFIX}/example/${GUDHI_MODULE}/ \\  \n")
+      endif()
+      if(EXISTS "${GUDHI_DOXYGEN_SOURCE_PREFIX}/utilities/${GUDHI_MODULE}")
+        set(GUDHI_DOXYGEN_EXAMPLE_PATH "${GUDHI_DOXYGEN_EXAMPLE_PATH}    ${GUDHI_DOXYGEN_SOURCE_PREFIX}/utilities/${GUDHI_MODULE}/ \\  \n")
+      endif()
+    endforeach(GUDHI_MODULE ${GUDHI_MODULES_FULL_LIST})
+    set(GUDHI_DOXYGEN_COMMON_DOC_PATH "${GUDHI_DOXYGEN_SOURCE_PREFIX}/doc/common")
+    set(GUDHI_DOXYGEN_UTILS_PATH "utilities/*")
+  endif()
 
   message("++ Doxygen version ${DOXYGEN_VERSION}")
   if (DOXYGEN_VERSION VERSION_LESS 1.9.3)

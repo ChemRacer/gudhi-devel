@@ -597,6 +597,9 @@ class Persistent_cohomology {
     int siz = std::max(dim_max_, 0);
     // Init Betti numbers vector with zeros until Simplicial complex dimension
     std::vector<int> betti_numbers(siz);
+    // GMJ
+    std::cout << "BETTI!!" << std::endl;
+    // GMJ
 
     for (auto pair : persistent_pairs_) {
       // Count never ended persistence intervals
