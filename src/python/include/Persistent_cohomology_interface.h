@@ -57,16 +57,12 @@ persistent_cohomology::Persistent_cohomology<FilteredComplex, persistent_cohomol
     Base::compute_persistent_cohomology(min_persistence);
   }
 
+
   std::vector<std::pair<int, std::pair<double, double>>> get_persistence() {
     std::vector<std::pair<int, std::pair<double, double>>> persistence;
     auto const& persistent_pairs = Base::get_persistent_pairs();
     persistence.reserve(persistent_pairs.size());
     for (auto pair : persistent_pairs) {
-      // gmj: Sorted by death
-      // std::cout << "persistence dimension " << stptr_->dimension(get<0>(pair)) << std::endl;
-      // std::cout << "persistence pair " << stptr_->filtration(get<0>(pair))<< " " << stptr_->filtration(get<1>(pair)) << std::endl;
-      // std::cout << " " << std::endl;
-      // gmj
       persistence.emplace_back(stptr_->dimension(get<0>(pair)),
                                std::make_pair(stptr_->filtration(get<0>(pair)),
                                               stptr_->filtration(get<1>(pair))));

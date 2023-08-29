@@ -228,6 +228,7 @@ class Simplex_tree_interface : public Simplex_tree<SimplexTreeOptions> {
     return Base::skeleton_simplex_range(dimension).end();
   }
 
+
   std::pair<Boundary_simplex_iterator, Boundary_simplex_iterator> get_boundary_iterators(const Simplex& simplex) {
     auto bd_sh = Base::find(simplex);
     if (bd_sh == Base::null_simplex())
