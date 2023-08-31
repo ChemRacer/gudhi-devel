@@ -179,6 +179,10 @@ class Persistent_cohomology {
     //
     for (auto sh : cpx_->filtration_simplex_range()) {
       int dim_simplex = cpx_->dimension(sh);
+      // GMJ
+      std::cout << "Key " << cpx_->key(sh) << " Dimension " << dim_simplex << std::endl;
+      // std::cout << "Simplex " << cpx_->simplex(cpx_->key(sh)) << std::endl; 
+      // GMJ
       switch (dim_simplex) {
         case 0:
           break;
@@ -230,6 +234,7 @@ class Persistent_cohomology {
       // respectively u and v.
       Simplex_key idx_coc_u, idx_coc_v;
 
+
       auto map_it_u = zero_cocycles_.find(ku);
 
       // If the index of the cocycle representing the class is already ku.
@@ -248,6 +253,11 @@ class Persistent_cohomology {
       } else {
         idx_coc_v = map_it_v->second;
       }
+      //GMJ
+      std::cout<<"Simplices that make connected components "<<std::endl;
+      std::cout<<idx_coc_u<<" "<<idx_coc_v<<std::endl;
+      std::cout<<std::endl;
+      //GMJ
 
       if (cpx_->filtration(cpx_->simplex(idx_coc_u))
           < cpx_->filtration(cpx_->simplex(idx_coc_v))) {  // Kill cocycle [idx_coc_v], which is younger.
@@ -286,7 +296,9 @@ class Persistent_cohomology {
     } else if (dim_max_ > 1) {  // If ku == kv, same connected component: create a 1-cocycle class.
       create_cocycle(sigma, coeff_field_.multiplicative_identity(), coeff_field_.characteristic());
     }
+
   }
+  
 
   /*
    * Compute the annotation of the boundary of a simplex.
@@ -305,7 +317,6 @@ class Persistent_cohomology {
                                          // alternate sum in the boundary.
     Simplex_key key;
     Column * curr_col;
-
     for (auto sh : cpx_->boundary_simplex_range(sigma)) {
       key = cpx_->key(sh);
       if (key != cpx_->null_key()) {  // A simplex with null_key is a killer, and have null annotation
@@ -321,6 +332,7 @@ class Persistent_cohomology {
     std::sort(annotations_in_boundary.begin(), annotations_in_boundary.end(),
               [](annotation_t const& a, annotation_t const& b) { return a.first < b.first; });
 
+
     // Sum the annotations with multiplicity, using a map<key,coeff>
     // to represent a sparse vector.
     std::pair<typename std::map<Simplex_key, Arith_element>::iterator, bool> result_insert_a_ds;
@@ -330,6 +342,7 @@ class Persistent_cohomology {
       while (++ann_it != annotations_in_boundary.end() && ann_it->first == col) {
         mult += ann_it->second;
       }
+
       // The following test is just a heuristic, it is not required, and it is fine that is misses p == 0.
       if (mult != coeff_field_.additive_identity()) {  // For all columns in the boundary,
         for (auto cell_ref : col->col_) {  // insert every cell in map_a_ds with multiplicity
@@ -377,15 +390,22 @@ class Persistent_cohomology {
           (a_ds_rit != a_ds.rend())
               && (prod != coeff_field_.multiplicative_identity()); ++a_ds_rit) {
         std::tie(inv_x, charac) = coeff_field_.inverse(a_ds_rit->second, prod);
-
+        // GMJ
+        std::cout<<"a_ds_rit "<<a_ds_rit->first<<std::endl;
+        std::cout<<"a_ds_rit "<<a_ds_rit->second<<std::endl;
+        std::cout<<"inv_x "<<inv_x<<std::endl;
+        std::cout<<"additive_identity "<<coeff_field_.additive_identity()<<std::endl;
+        // GMJ
         if (inv_x != coeff_field_.additive_identity()) {
           destroy_cocycle(sigma, a_ds, a_ds_rit->first, inv_x, charac);
           prod /= charac;
+
         }
       }
       if (prod != coeff_field_.multiplicative_identity()
           && dim_sigma < dim_max_) {
         create_cocycle(sigma, coeff_field_.multiplicative_identity(prod), prod);
+
       }
     }
   }
@@ -400,6 +420,9 @@ class Persistent_cohomology {
   void create_cocycle(Simplex_handle sigma, Arith_element x,
                       Arith_element charac) {
     Simplex_key key = cpx_->key(sigma);
+    // GMJ
+    std::cout << "Create " << key << std::endl;
+    // GMJ
     // Create a column containing only one cell,
     Column * new_col = column_pool_.construct(key);
     Cell * new_cell = cell_pool_.construct(key, x, new_col);
@@ -433,6 +456,9 @@ class Persistent_cohomology {
           , charac);                                           // fields
     }
 
+    // GMJ
+    std::cout << "Destroy " << cpx_->key(sigma)<< " "<< death_key << std::endl;
+    // GMJ
     auto death_key_row = transverse_idx_.find(death_key);  // Find the beginning of the row.
     std::pair<typename Cam::iterator, bool> result_insert_cam;
 
@@ -503,6 +529,8 @@ class Persistent_cohomology {
                          , Arith_element w) {
     auto target_it = target.col_.begin();
     auto other_it = other.begin();
+    
+
     while (target_it != target.col_.end() && other_it != other.end()) {
       if (target_it->key_ < other_it->first) {
         ++target_it;
@@ -597,10 +625,6 @@ class Persistent_cohomology {
     int siz = std::max(dim_max_, 0);
     // Init Betti numbers vector with zeros until Simplicial complex dimension
     std::vector<int> betti_numbers(siz);
-    // GMJ
-    std::cout << "BETTI!!" << std::endl;
-    // GMJ
-
     for (auto pair : persistent_pairs_) {
       // Count never ended persistence intervals
       if (cpx_->null_simplex() == get<1>(pair)) {
@@ -617,9 +641,6 @@ class Persistent_cohomology {
    *
    */
   int betti_number(int dimension) const {
-    // GMJ
-    std::cout << "BETTI!!" << std::endl;
-    // GMJ
     int betti_number = 0;
 
     for (auto pair : persistent_pairs_) {
@@ -639,14 +660,10 @@ class Persistent_cohomology {
    *  @param[in] Integer value
    *  @return The input integer value 
    */
-  int gmj_boundary() const {
+  void gmj_boundary(){
     // GMJ
     std::cout << "GMJ TEST " << std::endl;
     // GMJ
-    for (auto pair : persistent_pairs_) {
-      std::cout << get<0>(pair) << " " << get<1>(pair) <<std::endl;
-    }
-    return 0;
   }
 
   /** @brief Returns the persistent Betti numbers.

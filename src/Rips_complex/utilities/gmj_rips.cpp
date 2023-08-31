@@ -59,6 +59,11 @@ int main(int argc, char* argv[]) {
 
   pcoh.compute_persistent_cohomology(min_persistence);
 
+  // GMJ 
+  // Add code here
+  pcoh.gmj_boundary();
+  //
+
   // Output the diagram in filediag
   if (filediag.empty()) {
     pcoh.output_diagram();
