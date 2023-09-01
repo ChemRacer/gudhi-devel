@@ -191,6 +191,9 @@ class Persistent_cohomology {
           break;
         default:
           update_cohomology_groups(sh, dim_simplex);
+          // GMJ
+          std::cout<<std::endl;
+          // GMJ
           break;
       }
     }
@@ -319,6 +322,9 @@ class Persistent_cohomology {
     Column * curr_col;
     for (auto sh : cpx_->boundary_simplex_range(sigma)) {
       key = cpx_->key(sh);
+      // GMJ
+      std::cout<<" key annot "<<key<<std::endl;               
+      // GMJ
       if (key != cpx_->null_key()) {  // A simplex with null_key is a killer, and have null annotation
         // Find its annotation vector
         curr_col = ds_repr_[dsets_.find_set(key)];
@@ -327,6 +333,7 @@ class Persistent_cohomology {
         }
       }
       sign = -sign;
+
     }
     // Place identical annotations consecutively so we can easily sum their multiplicities.
     std::sort(annotations_in_boundary.begin(), annotations_in_boundary.end(),
@@ -339,6 +346,7 @@ class Persistent_cohomology {
     for (auto ann_it = annotations_in_boundary.begin(); ann_it != annotations_in_boundary.end(); /**/) {
       Column* col = ann_it->first;
       int mult = ann_it->second;
+
       while (++ann_it != annotations_in_boundary.end() && ann_it->first == col) {
         mult += ann_it->second;
       }
@@ -347,7 +355,6 @@ class Persistent_cohomology {
       if (mult != coeff_field_.additive_identity()) {  // For all columns in the boundary,
         for (auto cell_ref : col->col_) {  // insert every cell in map_a_ds with multiplicity
           Arith_element w_y = coeff_field_.times(cell_ref.coefficient_, mult);  // coefficient * multiplicity
-
           if (w_y != coeff_field_.additive_identity()) {  // if != 0
             result_insert_a_ds = map_a_ds.insert(std::pair<Simplex_key, Arith_element>(cell_ref.key_, w_y));
             if (!(result_insert_a_ds.second)) {  // if cell_ref.key_ already a Key in map_a_ds
@@ -390,12 +397,6 @@ class Persistent_cohomology {
           (a_ds_rit != a_ds.rend())
               && (prod != coeff_field_.multiplicative_identity()); ++a_ds_rit) {
         std::tie(inv_x, charac) = coeff_field_.inverse(a_ds_rit->second, prod);
-        // GMJ
-        std::cout<<"a_ds_rit "<<a_ds_rit->first<<std::endl;
-        std::cout<<"a_ds_rit "<<a_ds_rit->second<<std::endl;
-        std::cout<<"inv_x "<<inv_x<<std::endl;
-        std::cout<<"additive_identity "<<coeff_field_.additive_identity()<<std::endl;
-        // GMJ
         if (inv_x != coeff_field_.additive_identity()) {
           destroy_cocycle(sigma, a_ds, a_ds_rit->first, inv_x, charac);
           prod /= charac;
@@ -466,6 +467,7 @@ class Persistent_cohomology {
 
     while (row_cell_it != death_key_row->second.row_->end()) {  // Traverse all cells in
       // the row at index death_key.
+      std::cout<<row_cell_it->self_col_<<std::endl;
       Arith_element w = coeff_field_.times_minus(inv_x, row_cell_it->coefficient_);
 
       if (w != coeff_field_.additive_identity()) {
