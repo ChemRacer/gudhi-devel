@@ -297,6 +297,9 @@ class Persistent_cohomology {
       }
       cpx_->assign_key(sigma, cpx_->null_key());
     } else if (dim_max_ > 1) {  // If ku == kv, same connected component: create a 1-cocycle class.
+      // GMJ
+      std::cout<<"dim_max_>1 "<<dim_max_<<" "<<cpx_->key(sigma)<<std::endl; 
+      // GMJ
       create_cocycle(sigma, coeff_field_.multiplicative_identity(), coeff_field_.characteristic());
     }
 
@@ -467,7 +470,6 @@ class Persistent_cohomology {
 
     while (row_cell_it != death_key_row->second.row_->end()) {  // Traverse all cells in
       // the row at index death_key.
-      std::cout<<row_cell_it->self_col_<<std::endl;
       Arith_element w = coeff_field_.times_minus(inv_x, row_cell_it->coefficient_);
 
       if (w != coeff_field_.additive_identity()) {
