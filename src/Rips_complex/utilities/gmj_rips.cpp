@@ -16,6 +16,7 @@
 
 #include <boost/program_options.hpp>
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include <limits>  // infinity
@@ -39,7 +40,6 @@ int main(int argc, char* argv[]) {
   int dim_max;
   int p;
   Filtration_value min_persistence;
-
   program_options(argc, argv, off_file_points, filediag, threshold, dim_max, p, min_persistence);
 
   Points_off_reader off_reader(off_file_points);
@@ -51,7 +51,14 @@ int main(int argc, char* argv[]) {
   rips_complex_from_file.create_complex(simplex_tree, dim_max);
   std::clog << "The complex contains " << simplex_tree.num_simplices() << " simplices \n";
   std::clog << "   and has dimension " << simplex_tree.dimension() << " \n";
-
+  //GMJ
+  // simplex_tree updsimp;
+  // updsimp=simplex_tree.prune_above_filtration(2.412);
+  // if (updsimp==simplex_tree){
+  //   std::cout<<"Not Updated "<<std::endl;
+  // }
+  //GMJ
+    
   // Compute the persistence diagram of the complex
   Persistent_cohomology pcoh(simplex_tree);
   // initializes the coefficient field for homology
