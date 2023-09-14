@@ -29,6 +29,7 @@ using Field_Zp = Gudhi::persistent_cohomology::Field_Zp;
 using Persistent_cohomology = Gudhi::persistent_cohomology::Persistent_cohomology<Simplex_tree, Field_Zp>;
 using Point = std::vector<double>;
 using Points_off_reader = Gudhi::Points_off_reader<Point>;
+using updsimp = Gudhi::Simplex_tree<Gudhi::Simplex_tree_options_fast_persistence>;
 
 void program_options(int argc, char* argv[], std::string& off_file_points, std::string& filediag,
                      Filtration_value& threshold, int& dim_max, int& p, Filtration_value& min_persistence);
@@ -52,11 +53,27 @@ int main(int argc, char* argv[]) {
   std::clog << "The complex contains " << simplex_tree.num_simplices() << " simplices \n";
   std::clog << "   and has dimension " << simplex_tree.dimension() << " \n";
   //GMJ
-  // simplex_tree updsimp;
-  // updsimp=simplex_tree.prune_above_filtration(2.412);
-  // if (updsimp==simplex_tree){
-  //   std::cout<<"Not Updated "<<std::endl;
-  // }
+  updsimp trysimp = simplex_tree;
+  trysimp.prune_above_filtration(2.4122471006511748);
+  std::clog << "The complex contains " << trysimp.num_simplices() << " simplices \n";
+  std::clog << "   and has dimension " << trysimp.dimension() << " \n";
+  std::clog << "Rips complex is of dimension " << trysimp.dimension() <<
+                   " - " << trysimp.num_simplices() << " simplices - " <<
+                   trysimp.num_vertices() << " vertices." << std::endl;
+
+  std::clog << "Iterator on Rips complex simplices in the filtration order, with [filtration value]:" <<
+                   std::endl;
+  for (auto f_simplex : trysimp.filtration_simplex_range()) {
+    std::clog << "   ( ";
+    for (auto vertex : trysimp.simplex_vertex_range(f_simplex)) {
+      std::clog << vertex << " ";
+    }
+    std::clog << ") -> " << "[" << trysimp.filtration(f_simplex) << "] ";
+    std::clog << std::endl;
+  }
+  //if (updsimp==simplex_tree){
+  //  std::cout<<"Not Updated "<<std::endl;
+  //}
   //GMJ
     
   // Compute the persistence diagram of the complex

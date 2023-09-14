@@ -29,3 +29,9 @@ To install GUDHI, you can follow the [C++ compilation procedure](https://gudhi.i
 * [Subscribe to the GUDHI users mailing list](https://gudhi.inria.fr/keepintouch/)
 * [Tutorials](https://gudhi.inria.fr/tutorials/)
 * [Changelog](.github/changelog.md)
+
+
+# GMJ Additions
+- Useful examples
+    + point_cloud_edge_collapse_rips_persistence
+    + gmj_rips
