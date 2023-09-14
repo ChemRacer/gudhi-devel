@@ -181,7 +181,7 @@ class Persistent_cohomology {
       int dim_simplex = cpx_->dimension(sh);
       // GMJ
       std::cout << "Key " << cpx_->key(sh) << " Dimension " << dim_simplex << std::endl;
-      // std::cout << "Simplex " << cpx_->simplex(cpx_->key(sh)) << std::endl; 
+      std::cout << "Filtration " << cpx_->filtration(sh) << std:: endl;
       // GMJ
       switch (dim_simplex) {
         case 0:
@@ -259,8 +259,11 @@ class Persistent_cohomology {
       //GMJ
       std::cout<<"Simplices that make connected components "<<std::endl;
       std::cout<<idx_coc_u<<" "<<idx_coc_v<<std::endl;
+      std::cout<<"filtu "<<cpx_->filtration(cpx_->simplex(idx_coc_u))<<" ";
+      std::cout<<"filtv "<<cpx_->filtration(cpx_->simplex(idx_coc_v))<<std::endl;
       std::cout<<std::endl;
       //GMJ
+
 
       if (cpx_->filtration(cpx_->simplex(idx_coc_u))
           < cpx_->filtration(cpx_->simplex(idx_coc_v))) {  // Kill cocycle [idx_coc_v], which is younger.
@@ -325,14 +328,15 @@ class Persistent_cohomology {
     Column * curr_col;
     for (auto sh : cpx_->boundary_simplex_range(sigma)) {
       key = cpx_->key(sh);
-      // GMJ
-      std::cout<<" key annot "<<key<<std::endl;               
-      // GMJ
       if (key != cpx_->null_key()) {  // A simplex with null_key is a killer, and have null annotation
         // Find its annotation vector
         curr_col = ds_repr_[dsets_.find_set(key)];
         if (curr_col != NULL) {  // and insert it in annotations_in_boundary with multyiplicative factor "sign".
           annotations_in_boundary.emplace_back(curr_col, sign);
+          // GMJ: note... we're missing a boundary
+          std::cout<<" key annot "<<key<<std::endl;               
+          std::cout<<" sign annot "<<sign<<std::endl;               
+          // GMJ
         }
       }
       sign = -sign;
@@ -349,7 +353,6 @@ class Persistent_cohomology {
     for (auto ann_it = annotations_in_boundary.begin(); ann_it != annotations_in_boundary.end(); /**/) {
       Column* col = ann_it->first;
       int mult = ann_it->second;
-
       while (++ann_it != annotations_in_boundary.end() && ann_it->first == col) {
         mult += ann_it->second;
       }
@@ -440,6 +443,11 @@ class Persistent_cohomology {
     new_hcell->push_back(*new_cell);
     transverse_idx_[key] = cocycle(charac, new_hcell);  // insert the new row
     ds_repr_[key] = new_col;
+    //GMJ
+    for(auto gmjcycle:transverse_idx_){
+      std::cout<<"gmjcycle "<<gmjcycle.first <<std::endl;
+    }
+    //GMJ
   }
 
   /*  \brief Destroy a cocycle class.
@@ -468,7 +476,9 @@ class Persistent_cohomology {
 
     auto row_cell_it = death_key_row->second.row_->begin();
 
+
     while (row_cell_it != death_key_row->second.row_->end()) {  // Traverse all cells in
+      //GMJ: HERE... I think what we want is here... just need to exploit it
       // the row at index death_key.
       Arith_element w = coeff_field_.times_minus(inv_x, row_cell_it->coefficient_);
 
@@ -479,7 +489,8 @@ class Persistent_cohomology {
         for (auto& col_cell : curr_col->col_) {
           col_cell.base_hook_cam_h::unlink();
         }
-
+        //GMJ Start here tomorrow: cam_ is a boost intrusive set... probably what we need
+        std::cout<<"GMJ CAM "<<cam_<<std::endl;
         // Remove the column from the CAM before modifying its value
         cam_.erase(cam_.iterator_to(*curr_col));
         // Proceed to the reduction of the column
@@ -507,6 +518,7 @@ class Persistent_cohomology {
             // intrusive containers don't own their elements, we have to release them manually
             curr_col->col_.clear_and_dispose([&](Cell*p){cell_pool_.destroy(p);});
             column_pool_.destroy(curr_col);  // delete curr_col;
+
           }
         }
       } else {
@@ -536,6 +548,9 @@ class Persistent_cohomology {
     
 
     while (target_it != target.col_.end() && other_it != other.end()) {
+      //GMJ
+      std::cout<<target_it->key_<<" "<<other_it->first<<" "<<other_it->second<<std::endl;
+      //GMJ
       if (target_it->key_ < other_it->first) {
         ++target_it;
       } else {

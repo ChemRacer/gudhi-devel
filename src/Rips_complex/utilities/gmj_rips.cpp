@@ -121,23 +121,23 @@ int main(int argc, char* argv[]) {
 
   // GMJ: Perform edge collapse, expansion, and then prune above filtration
   stree.prune_above_filtration(2.4122471006511748);
-  std::clog << "The complex contains " << stree.num_simplices() << " simplices \n";
-  std::clog << "   and has dimension " << stree.dimension() << " \n";
+  std::cout << "The complex contains " << stree.num_simplices() << " simplices \n";
+  std::cout << "   and has dimension " << stree.dimension() << " \n";
 
   // GMJ: Print simplex information
-  std::clog << "Rips complex is of dimension " << stree.dimension() <<
+  std::cout << "Rips complex is of dimension " << stree.dimension() <<
                    " - " << stree.num_simplices() << " simplices - " <<
                    stree.num_vertices() << " vertices." << std::endl;
 
-  std::clog << "Iterator on Rips complex simplices in the filtration order, with [filtration value]:" <<
+  std::cout << "Iterator on Rips complex simplices in the filtration order, with [filtration value]:" <<
                    std::endl;
   for (auto f_simplex : stree.filtration_simplex_range()) {
-    std::clog << "   ( ";
+    std::cout << "   ( ";
     for (auto vertex : stree.simplex_vertex_range(f_simplex)) {
-      std::clog << vertex << " ";
+      std::cout << vertex << " ";
     }
-    std::clog << ") -> " << "[" << stree.filtration(f_simplex) << "] ";
-    std::clog << std::endl;
+    std::cout << ") -> " << "[" << stree.filtration(f_simplex) << "] ";
+    std::cout << std::endl;
   }
   //GMJ
     
