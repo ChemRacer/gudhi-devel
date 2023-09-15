@@ -74,11 +74,11 @@ class Persistent_cohomology {
   typedef Persistent_cohomology_column<Simplex_key, Arith_element> Column;  // contains 1 set_hook
   // Cell type
   typedef typename Column::Cell Cell;   // contains 2 list_hooks
+
   // Remark: constant_time_size must be false because base_hook_cam_h has auto_unlink link_mode
   typedef boost::intrusive::list<Cell,
       boost::intrusive::constant_time_size<false>,
       boost::intrusive::base_hook<base_hook_cam_h> > Hcell;
-
   typedef boost::intrusive::set<Column,
       boost::intrusive::constant_time_size<false> > Cam;
   // Sparse column type for the annotation of the boundary of an element.
@@ -259,8 +259,6 @@ class Persistent_cohomology {
       //GMJ
       std::cout<<"Simplices that make connected components "<<std::endl;
       std::cout<<idx_coc_u<<" "<<idx_coc_v<<std::endl;
-      std::cout<<"filtu "<<cpx_->filtration(cpx_->simplex(idx_coc_u))<<" ";
-      std::cout<<"filtv "<<cpx_->filtration(cpx_->simplex(idx_coc_v))<<std::endl;
       std::cout<<std::endl;
       //GMJ
 
@@ -485,12 +483,11 @@ class Persistent_cohomology {
       if (w != coeff_field_.additive_identity()) {
         Column * curr_col = row_cell_it->self_col_;
         ++row_cell_it;
+
         // Disconnect the column from the rows in the CAM.
         for (auto& col_cell : curr_col->col_) {
           col_cell.base_hook_cam_h::unlink();
         }
-        //GMJ Start here tomorrow: cam_ is a boost intrusive set... probably what we need
-        std::cout<<"GMJ CAM "<<cam_<<std::endl;
         // Remove the column from the CAM before modifying its value
         cam_.erase(cam_.iterator_to(*curr_col));
         // Proceed to the reduction of the column
@@ -546,7 +543,15 @@ class Persistent_cohomology {
     auto target_it = target.col_.begin();
     auto other_it = other.begin();
     
+    //GMJ
+    std::cout<<"target "<<typeid(target).name()<<std::endl;
+    std::cout<<"other "<<typeid(other).name()<<std::endl;
+    for (auto i: other){
+      std::cout <<"Pair 0 "<<std::get<0>(i) << std::endl;
+      std::cout <<"Pair 1 "<<std::get<1>(i) << std::endl;
+    }
 
+    //GMJ
     while (target_it != target.col_.end() && other_it != other.end()) {
       //GMJ
       std::cout<<target_it->key_<<" "<<other_it->first<<" "<<other_it->second<<std::endl;
