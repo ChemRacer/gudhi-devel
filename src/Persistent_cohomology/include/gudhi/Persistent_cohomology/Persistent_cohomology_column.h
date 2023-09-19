@@ -103,6 +103,7 @@ class Persistent_cohomology_column : public boost::intrusive::set_base_hook<
     typename Col_type::const_iterator it1 = c1.col_.begin();
     typename Col_type::const_iterator it2 = c2.col_.begin();
     while (it1 != c1.col_.end() && it2 != c2.col_.end()) {
+
       if (it1->key_ == it2->key_) {
         if (it1->coefficient_ == it2->coefficient_) {
           ++it1;

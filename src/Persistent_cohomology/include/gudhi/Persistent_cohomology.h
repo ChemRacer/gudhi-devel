@@ -550,12 +550,8 @@ class Persistent_cohomology {
       std::cout <<"Pair 0 "<<std::get<0>(i) << std::endl;
       std::cout <<"Pair 1 "<<std::get<1>(i) << std::endl;
     }
-
     //GMJ
     while (target_it != target.col_.end() && other_it != other.end()) {
-      //GMJ
-      std::cout<<target_it->key_<<" "<<other_it->first<<" "<<other_it->second<<std::endl;
-      //GMJ
       if (target_it->key_ < other_it->first) {
         ++target_it;
       } else {
@@ -577,7 +573,9 @@ class Persistent_cohomology {
             ++other_it;   // iterators remain valid
             Cell * tmp_cell_ptr = &(*tmp_it);
             target.col_.erase(tmp_it);  // removed from column
-
+            //GMJ
+            std::cout<<"tmp "<<typeid(tmp_it).name()<<std::endl;
+            //GMJ
             cell_pool_.destroy(tmp_cell_ptr);  // delete from memory
           } else {
             ++target_it;
