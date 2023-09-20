@@ -121,6 +121,9 @@ class Persistent_cohomology {
       cpx_->assign_key(sh, idx_fil);
       ++idx_fil;
       dsets_.make_set(cpx_->key(sh));
+      // GMJ
+      std::cout<<"simpkey "<<cpx_->key(sh)<<std::endl;
+      // GMJ
     }
     if (persistence_dim_max) {
       ++dim_max_;
@@ -144,6 +147,9 @@ class Persistent_cohomology {
     }
 
     bool operator()(Simplex_handle sh1, Simplex_handle sh2) {
+      // GMJ
+      std::cout<<"simpkey12 "<<cpx_->key(sh1)<<" "<<cpx_->key(sh2)<<std::endl;
+      // GMJ
       return cpx_->filtration(sh2) - cpx_->filtration(sh1) > min_length_;
     }
 
@@ -188,6 +194,9 @@ class Persistent_cohomology {
           break;
         case 1:
           update_cohomology_groups_edge(sh);
+          // GMJ
+          std::cout<<std::endl;
+          // GMJ
           break;
         default:
           update_cohomology_groups(sh, dim_simplex);
@@ -205,16 +214,25 @@ class Persistent_cohomology {
       && zero_cocycles_.find(key) == zero_cocycles_.end()) {
         persistent_pairs_.emplace_back(
             cpx_->simplex(key), cpx_->null_simplex(), coeff_field_.characteristic());
+      //GMJ 
+      std::cout<<"inf "<<key<<std::endl;
+      //GMJ
       }
     }
     for (auto zero_idx : zero_cocycles_) {
       persistent_pairs_.emplace_back(
           cpx_->simplex(zero_idx.second), cpx_->null_simplex(), coeff_field_.characteristic());
+      //GMJ 
+      std::cout<<"zerocycle "<<zero_idx.first<<" "<<zero_idx.second<<std::endl;
+      //GMJ
     }
     // Compute infinite interval of dimension > 0
     for (auto cocycle : transverse_idx_) {
       persistent_pairs_.emplace_back(
           cpx_->simplex(cocycle.first), cpx_->null_simplex(), cocycle.second.characteristics_);
+      //GMJ 
+      std::cout<<"cocyclecycle "<<cocycle.first<<" "<<std::endl;
+      //GMJ
     }
   }
 
@@ -227,24 +245,36 @@ class Persistent_cohomology {
     Simplex_handle u, v;
 
     boost::tie(u, v) = cpx_->endpoints(sigma);
-
+    // GMJ
+    std::cout<<"update_edge0 "<<cpx_->key(u)<<" "<<cpx_->key(v)<<std::endl;
+    // GMJ 
+    
     Simplex_key ku = dsets_.find_set(cpx_->key(u));
     Simplex_key kv = dsets_.find_set(cpx_->key(v));
-
+    // GMJ
+    std::cout<<"update_edge1 "<<ku<<" "<<kv<<std::endl;
+    // GMJ 
     if (ku != kv) {        // Destroy a connected component
       dsets_.link(ku, kv);
+      // GMJ
+      std::cout<<"update_edge1a "<<dsets_.find_set(ku)<<" "<<dsets_.find_set(kv)<<std::endl;
+      // GMJ 
       // Keys of the simplices which created the connected components containing
       // respectively u and v.
       Simplex_key idx_coc_u, idx_coc_v;
 
-
       auto map_it_u = zero_cocycles_.find(ku);
-
       // If the index of the cocycle representing the class is already ku.
       if (map_it_u == zero_cocycles_.end()) {
         idx_coc_u = ku;
+        // GMJ
+        std::cout<<"update_edge3 "<<idx_coc_u<<std::endl;
+        // GMJ 
       } else {
         idx_coc_u = map_it_u->second;
+        // GMJ
+        std::cout<<"update_edge4 "<<idx_coc_u<<std::endl;
+        // GMJ 
       }
 
 
@@ -253,8 +283,14 @@ class Persistent_cohomology {
       // If the index of the cocycle representing the class is already kv.
       if (map_it_v == zero_cocycles_.end()) {
         idx_coc_v = kv;
+        // GMJ
+        std::cout<<"update_edge5 "<<idx_coc_v<<std::endl;
+        // GMJ 
       } else {
         idx_coc_v = map_it_v->second;
+        // GMJ
+        std::cout<<"update_edge6 "<<idx_coc_v<<std::endl;
+        // GMJ 
       }
       //GMJ
       std::cout<<"Simplices that make connected components "<<std::endl;
@@ -265,38 +301,68 @@ class Persistent_cohomology {
 
       if (cpx_->filtration(cpx_->simplex(idx_coc_u))
           < cpx_->filtration(cpx_->simplex(idx_coc_v))) {  // Kill cocycle [idx_coc_v], which is younger.
+        // GMJ
+        std::cout<<"update_edge7 "<<idx_coc_u<<" "<<idx_coc_v<<std::endl;
+        // GMJ 
         if (interval_length_policy(cpx_->simplex(idx_coc_v), sigma)) {
           persistent_pairs_.emplace_back(
               cpx_->simplex(idx_coc_v), sigma, coeff_field_.characteristic());
+          // GMJ
+          std::cout<<"update_edge8 "<<idx_coc_u<<" "<<idx_coc_v<<std::endl;
+          // GMJ 
         }
         // Maintain the index of the 0-cocycle alive.
         if (kv != idx_coc_v) {
           zero_cocycles_.erase(map_it_v);
+          // GMJ
+          std::cout<<"update_edge9 "<<idx_coc_v<<std::endl;
+          // GMJ 
         }
         if (kv == dsets_.find_set(kv)) {
           if (ku != idx_coc_u) {
             zero_cocycles_.erase(map_it_u);
+            // GMJ
+            std::cout<<"update_edge10 "<<idx_coc_u<<std::endl;
+            // GMJ 
           }
           zero_cocycles_[kv] = idx_coc_u;
+          // GMJ
+          std::cout<<"update_edge11 "<<idx_coc_u<<std::endl;
+          // GMJ 
         }
       } else {  // Kill cocycle [idx_coc_u], which is younger.
         if (interval_length_policy(cpx_->simplex(idx_coc_u), sigma)) {
           persistent_pairs_.emplace_back(
               cpx_->simplex(idx_coc_u), sigma, coeff_field_.characteristic());
+          // GMJ
+          std::cout<<"update_edge12 "<<idx_coc_u<<std::endl;
+          // GMJ 
         }
         // Maintain the index of the 0-cocycle alive.
         if (ku != idx_coc_u) {
           zero_cocycles_.erase(map_it_u);
+          // GMJ
+          std::cout<<"update_edge13 "<<idx_coc_u<<std::endl;
+          // GMJ 
         }
         if (ku == dsets_.find_set(ku)) {
           if (kv != idx_coc_v) {
             zero_cocycles_.erase(map_it_v);
+            // GMJ
+            std::cout<<"update_edge14 "<<idx_coc_v<<std::endl;
+            // GMJ 
           }
           zero_cocycles_[ku] = idx_coc_v;
+          // GMJ
+          std::cout<<"update_edge15 "<<idx_coc_v<<std::endl;
+          // GMJ 
         }
 
       }
       cpx_->assign_key(sigma, cpx_->null_key());
+      // GMJ
+      std::cout<<"update_edge16 "<<cpx_->key(sigma)<<std::endl;
+      // GMJ 
     } else if (dim_max_ > 1) {  // If ku == kv, same connected component: create a 1-cocycle class.
       // GMJ
       std::cout<<"dim_max_>1 "<<dim_max_<<" "<<cpx_->key(sigma)<<std::endl; 
@@ -331,10 +397,6 @@ class Persistent_cohomology {
         curr_col = ds_repr_[dsets_.find_set(key)];
         if (curr_col != NULL) {  // and insert it in annotations_in_boundary with multyiplicative factor "sign".
           annotations_in_boundary.emplace_back(curr_col, sign);
-          // GMJ: note... we're missing a boundary
-          std::cout<<" key annot "<<key<<std::endl;               
-          std::cout<<" sign annot "<<sign<<std::endl;               
-          // GMJ
         }
       }
       sign = -sign;
@@ -385,6 +447,10 @@ class Persistent_cohomology {
       if (dim_sigma < dim_max_) {
         create_cocycle(sigma, coeff_field_.multiplicative_identity(),
                        coeff_field_.characteristic());
+
+        // GMJ
+        std::cout<<"create_cocycle 1 "<<cpx_->key(sigma)<<std::endl;
+        // GMJ
       }
     } else {        // sigma is a destructor in at least a field in coeff_field_
       // Convert map_a_ds to a vector
@@ -393,6 +459,9 @@ class Persistent_cohomology {
         a_ds.push_back(
             std::pair<Simplex_key, Arith_element>(map_a_ds_ref.first,
                                                   map_a_ds_ref.second));
+        // GMJ
+        std::cout<<"create_cocycle 2 "<<map_a_ds_ref.first<<" "<<map_a_ds_ref.second<<std::endl;
+        // GMJ
       }
 
       Arith_element inv_x, charac;
@@ -401,15 +470,24 @@ class Persistent_cohomology {
           (a_ds_rit != a_ds.rend())
               && (prod != coeff_field_.multiplicative_identity()); ++a_ds_rit) {
         std::tie(inv_x, charac) = coeff_field_.inverse(a_ds_rit->second, prod);
+        // GMJ
+        std::cout<<"create_cocycle 3a "<<a_ds_rit->first<<" "<<a_ds_rit->second<<std::endl;
+        // GMJ
         if (inv_x != coeff_field_.additive_identity()) {
           destroy_cocycle(sigma, a_ds, a_ds_rit->first, inv_x, charac);
           prod /= charac;
+          // GMJ
+          std::cout<<"create_cocycle 3 "<<cpx_->key(sigma)<<std::endl;
+          // GMJ
 
         }
       }
       if (prod != coeff_field_.multiplicative_identity()
           && dim_sigma < dim_max_) {
         create_cocycle(sigma, coeff_field_.multiplicative_identity(prod), prod);
+        // GMJ
+        std::cout<<"create_cocycle 4 "<<cpx_->key(sigma)<<std::endl;
+        // GMJ
 
       }
     }
@@ -435,6 +513,11 @@ class Persistent_cohomology {
     // and insert it in the matrix, in constant time thanks to the hint cam_.end().
     // Indeed *new_col has the biggest lexicographic value because key is the
     // biggest key used so far.
+    
+    // GMJ
+    std::cout<<"col "<<typeid(new_col).name()<<std::endl;
+    std::cout<<"col "<<column_pool_.construct(key)<<std::endl;
+    // GMJ
     cam_.insert(cam_.end(), *new_col);
     // Update the disjoint sets data structure.
     Hcell * new_hcell = new Hcell;
@@ -481,21 +564,31 @@ class Persistent_cohomology {
       Arith_element w = coeff_field_.times_minus(inv_x, row_cell_it->coefficient_);
 
       if (w != coeff_field_.additive_identity()) {
+        // GMJ
+        std::cout<<"destroy1 "<<row_cell_it->self_col_<<" "<<std::endl;
+        // GMJ
         Column * curr_col = row_cell_it->self_col_;
         ++row_cell_it;
 
         // Disconnect the column from the rows in the CAM.
         for (auto& col_cell : curr_col->col_) {
           col_cell.base_hook_cam_h::unlink();
+          // GMJ
+          std::cout<<"destroy2 "<<col_cell.key_<<" "<<std::endl;
+          // GMJ
         }
         // Remove the column from the CAM before modifying its value
         cam_.erase(cam_.iterator_to(*curr_col));
+
         // Proceed to the reduction of the column
         plus_equal_column(*curr_col, a_ds, w);
 
         if (curr_col->col_.empty()) {  // If the column is null
           ds_repr_[curr_col->class_key_] = NULL;
           column_pool_.destroy(curr_col);  // delete curr_col;
+          // GMJ
+          std::cout<<"destroy3 "<<curr_col->class_key_<<" "<<std::endl;
+          // GMJ
         } else {
           // Find whether the column obtained is already in the CAM
           result_insert_cam = cam_.insert(*curr_col);
@@ -503,6 +596,9 @@ class Persistent_cohomology {
             for (auto& col_cell : curr_col->col_) {
               // re-establish the row links
               transverse_idx_[col_cell.key_].row_->push_front(col_cell);
+              // GMJ
+              std::cout<<"destroy4 "<<col_cell.key_<<" "<<std::endl;
+              // GMJ
             }
           } else {  // There is already an identical column in the CAM:
             // merge two disjoint sets.
@@ -515,6 +611,9 @@ class Persistent_cohomology {
             // intrusive containers don't own their elements, we have to release them manually
             curr_col->col_.clear_and_dispose([&](Cell*p){cell_pool_.destroy(p);});
             column_pool_.destroy(curr_col);  // delete curr_col;
+            // GMJ
+            std::cout<<"destroy5 "<<key_tmp<<" "<<std::endl;
+            // GMJ
 
           }
         }
@@ -526,12 +625,21 @@ class Persistent_cohomology {
     // Because it is a killer simplex, set the data of sigma to null_key().
     if (charac == coeff_field_.characteristic()) {
       cpx_->assign_key(sigma, cpx_->null_key());
+       // GMJ
+       std::cout<<"destroy6 "<<cpx_->key(sigma)<<" "<<std::endl;
+       // GMJ
     }
     if (death_key_row->second.characteristics_ == charac) {
       delete death_key_row->second.row_;
       transverse_idx_.erase(death_key_row);
+      // GMJ
+      std::cout<<"destroy7 "<<death_key_row->second.row_<<" "<<std::endl;
+      // GMJ
     } else {
       death_key_row->second.characteristics_ /= charac;
+      // GMJ
+      std::cout<<"destroy8 "<<death_key_row->second.row_<<" "<<std::endl;
+      // GMJ
     }
   }
 
@@ -548,11 +656,14 @@ class Persistent_cohomology {
     std::cout<<"other "<<typeid(other).name()<<std::endl;
     for (auto i: other){
       std::cout <<"Pair 0 "<<std::get<0>(i) << std::endl;
-      std::cout <<"Pair 1 "<<std::get<1>(i) << std::endl;
+      // coeff: std::cout <<"Pair 1 "<<std::get<1>(i) << std::endl;
     }
     //GMJ
     while (target_it != target.col_.end() && other_it != other.end()) {
       if (target_it->key_ < other_it->first) {
+        // GMJ
+        std::cout<<"plusequal1 "<<target_it->key_<<" "<<other_it->first<<std::endl;
+        // GMJ
         ++target_it;
       } else {
         if (target_it->key_ > other_it->first) {
@@ -560,6 +671,9 @@ class Persistent_cohomology {
               , coeff_field_.additive_identity(), &target));
 
           cell_tmp->coefficient_ = coeff_field_.plus_times_equal(cell_tmp->coefficient_, other_it->second, w);
+          // GMJ
+          std::cout<<"plusequal2 "<<target_it->key_<<" "<<other_it->first<<" "<<other_it->second<<" "<<cell_tmp->key_<<std::endl;
+          // GMJ
 
           target.col_.insert(target_it, *cell_tmp);
 
@@ -567,6 +681,9 @@ class Persistent_cohomology {
         } else {  // it1->key == it2->key
           // target_it->coefficient_ <- target_it->coefficient_ + other_it->second * w
           target_it->coefficient_ = coeff_field_.plus_times_equal(target_it->coefficient_, other_it->second, w);
+          // GMJ
+          std::cout<<"plusequal3 "<<target_it->key_<<" "<<other_it->first<<" "<<other_it->second<<" "<<std::endl;
+          // GMJ
           if (target_it->coefficient_ == coeff_field_.additive_identity()) {
             auto tmp_it = target_it;
             ++target_it;
@@ -588,6 +705,9 @@ class Persistent_cohomology {
       Cell * cell_tmp = cell_pool_.construct(Cell(other_it->first, coeff_field_.additive_identity(), &target));
       cell_tmp->coefficient_ = coeff_field_.plus_times_equal(cell_tmp->coefficient_, other_it->second, w);
       target.col_.insert(target.col_.end(), *cell_tmp);
+      // GMJ
+      std::cout<<"plusequal4 "<<target_it->key_<<" "<<other_it->first<<" "<<other_it->second<<" "<<std::endl;
+      // GMJ
 
       ++other_it;
     }
