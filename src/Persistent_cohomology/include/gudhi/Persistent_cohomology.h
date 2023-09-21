@@ -556,7 +556,7 @@ class Persistent_cohomology {
     std::pair<typename Cam::iterator, bool> result_insert_cam;
 
     auto row_cell_it = death_key_row->second.row_->begin();
-
+    
 
     while (row_cell_it != death_key_row->second.row_->end()) {  // Traverse all cells in
       //GMJ: HERE... I think what we want is here... just need to exploit it
@@ -565,7 +565,8 @@ class Persistent_cohomology {
 
       if (w != coeff_field_.additive_identity()) {
         // GMJ
-        std::cout<<"destroy1 "<<row_cell_it->self_col_<<" "<<std::endl;
+        // std::cout<<"destroy1 "<<*row_cell_it->self_col_<<" "<<std::endl;
+        std::cout<<"destroy1 "<<typeid(row_cell_it->self_col_).name()<<" "<<std::endl;
         // GMJ
         Column * curr_col = row_cell_it->self_col_;
         ++row_cell_it;
