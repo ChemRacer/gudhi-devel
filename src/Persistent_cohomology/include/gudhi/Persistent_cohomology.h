@@ -223,7 +223,7 @@ class Persistent_cohomology {
       persistent_pairs_.emplace_back(
           cpx_->simplex(zero_idx.second), cpx_->null_simplex(), coeff_field_.characteristic());
       //GMJ 
-      std::cout<<"zerocycle "<<zero_idx.first<<" "<<zero_idx.second<<std::endl;
+      std::cout<<"zerocycle "<<zero_idx.first<<" "<<zero_idx.second<<" "<<std::endl;
       //GMJ
     }
     // Compute infinite interval of dimension > 0
