@@ -277,8 +277,6 @@ class Persistent_cohomology {
         // GMJ 
       }
 
-
-
       auto map_it_v = zero_cocycles_.find(kv);
       // If the index of the cocycle representing the class is already kv.
       if (map_it_v == zero_cocycles_.end()) {
@@ -302,7 +300,9 @@ class Persistent_cohomology {
       if (cpx_->filtration(cpx_->simplex(idx_coc_u))
           < cpx_->filtration(cpx_->simplex(idx_coc_v))) {  // Kill cocycle [idx_coc_v], which is younger.
         // GMJ
-        std::cout<<"update_edge7 "<<idx_coc_u<<" "<<idx_coc_v<<std::endl;
+        std::cout<<"update_edge7 "<<idx_coc_u<<" "<<idx_coc_v<<idx_coc_v<<std::endl;
+        std::cout<<"update_edge7fu "<<cpx_->filtration(cpx_->simplex(idx_coc_u))<<" "<<idx_coc_v<<std::endl;
+        std::cout<<"update_edge7fv "<<cpx_->filtration(cpx_->simplex(idx_coc_v))<<" "<<idx_coc_v<<std::endl;
         // GMJ 
         if (interval_length_policy(cpx_->simplex(idx_coc_v), sigma)) {
           persistent_pairs_.emplace_back(
@@ -440,6 +440,9 @@ class Persistent_cohomology {
    */
   void update_cohomology_groups(Simplex_handle sigma, int dim_sigma) {
 // Compute the annotation of the boundary of sigma:
+    //GMJ
+    std::cout<<"update_cohomology_groups "<<cpx_->key(sigma)<<std::endl;
+    //GMJ
     std::map<Simplex_key, Arith_element> map_a_ds;
     annotation_of_the_boundary(map_a_ds, sigma, dim_sigma);
 // Update the cohomology groups:
